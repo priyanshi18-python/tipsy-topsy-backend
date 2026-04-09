@@ -1,34 +1,19 @@
 import * as productRepo from "../repositories/product.repo.js";
 
-<<<<<<< HEADgit add src/services/product.service.js
-=======
-// ✅ Create Product Service
+// Create Product Service
 export const createProductService = async (data) => {
 
-  if (!data.name || !data.price || !data.stock) {
-    throw new Error("Required fields missing");
-  }
+    if (!data.name || !data.price || !data.stock) {
+        throw new Error("Required fields missing");
+    }
 
-  if (data.price <= 0) {
-    throw new Error("Price must be greater than 0");
-  }
+    if (data.price <= 0) {
+        throw new Error("Price must be greater than 0");
+    }
 
-  if (data.stock < 0) {
-    throw new Error("Stock cannot be negative");
-  }
+    if (data.stock < 0) {
+        throw new Error("Stock cannot be negative");
+    }
 
-  if (!Array.isArray(data.images) || data.images.length === 0) {
-    throw new Error("At least one image is required");
-  }
-
-  const product = await productRepo.createProduct(data);
-
-  return product;
+    return await productRepo.createProduct(data);
 };
-
-
-// ✅ Get Latest Products Service
-export const getLatestProductsService = async () => {
-  return await productRepo.getLatestProducts();
-};
->>>>>>> 2cdb62b60d085368bbca13bf2748f23ceaca9a8c
