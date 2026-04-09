@@ -1,14 +1,23 @@
-const express = require("express");
-const cors = require("cors");
 
-const app = express();
+import express from "express";
+import cors from "cors";
 
+// routes
+import productRoutes from "./routes/product.routes.js";
+
+const app = express(); // ✅ IMPORTANT
+
+// middlewares
 app.use(cors());
 app.use(express.json());
 
-// Test route
+// routes
+app.use("/api/products", productRoutes);
+
+// test route
 app.get("/", (req, res) => {
-  res.send("API is running 🚀");
+  res.send("API running 🚀");
 });
 
-module.exports = app;
+// export
+export default app; // ✅ MUST
