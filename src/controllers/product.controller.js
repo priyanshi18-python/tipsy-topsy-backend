@@ -48,3 +48,46 @@ export const getLatestProductsController = async (req, res) => {
     });
   }
 };
+
+// ✅ Update Product
+export const updateProductController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updated = await productService.updateProductService(id, req.body);
+
+    return res.status(200).json({
+      success: true,
+      message: "Product updated successfully",
+      data: serializeBigInt(updated)
+    });
+
+  } catch (err) {
+    console.error(err);
+    const statusCode = err.message === "Product not found" ? 404 : 400;
+    return res.status(statusCode).json({
+      success: false,
+      message: err.message || "Product update failed"
+    });
+  }
+};
+
+// ✅ Delete Product
+export const deleteProductController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await productService.deleteProductService(id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Product deleted successfully"
+    });
+
+  } catch (err) {
+    console.error(err);
+    const statusCode = err.message === "Product not found" ? 404 : 400;
+    return res.status(statusCode).json({
+      success: false,
+      message: err.message || "Product deletion failed"
+    });
+  }
+};
