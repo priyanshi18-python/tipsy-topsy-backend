@@ -10,7 +10,10 @@ import categoryRoutes from "./routes/category.routes.js";
 const app = express(); // ✅ IMPORTANT
 
 // middlewares
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3001',
+  credentials:true,
+}));
 app.use(express.json());
 
 // routes
@@ -20,7 +23,7 @@ app.use("/api/categories", categoryRoutes);
 
 // test route
 app.get("/", (req, res) => {
-  res.send("API running 🚀");
+  res.send("backend running 🚀");
 });
 
 // export
